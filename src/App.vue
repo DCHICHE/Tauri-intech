@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+      <Repository :messageEmitter="messageEmitter" />
+      <Editor :messageEmitter="messageEmitter" />
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
+import Repository from "./components/Repository.vue";
+import Editor from "./components/Editor.vue";
+import { EventEmitter } from "events";
 
-export default {
-  name: 'App',
+@Options({
   components: {
-    HelloWorld
-  }
+    Repository,
+    Editor,
+  },
+})
+export default class App extends Vue {
+    public messageEmitter = new EventEmitter();
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.container {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
 }
 </style>
